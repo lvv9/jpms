@@ -1,0 +1,59 @@
+package me.liuweiqiang.application.controller;
+
+import me.liuweiqiang.entity.Displayable;
+import me.liuweiqiang.interfaces.exports.IFundTransfer;
+import me.liuweiqiang.unoinpay.exports.TransferIn;
+//import me.liuweiqiang.unoinpay.opens.TransferOut;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.reflect.InaccessibleObjectException;
+import java.lang.reflect.Method;
+import java.util.ServiceLoader;
+
+@RestController
+public class HelloWorldController {
+    @GetMapping("/")
+    public String hello() throws Exception {
+        String display = Displayable.display();
+        System.out.println(display);
+
+        TransferIn transferIn = new TransferIn();
+        transferIn.transfer("External Account", "Internal Account", 100);
+        // can not be imported because module unoinpay opens me.liuweiqiang.unoinpay.opens package but not exports
+//        TransferOut exportedTransferOut = new TransferOut();
+
+        IFundTransfer transferOut = (IFundTransfer) Class
+                .forName("me.liuweiqiang.unoinpay.opens.TransferOut")
+                .getDeclaredConstructor()
+                .newInstance();
+        transferOut.transfer("Internal Account", "External Account", 101);
+        Class<?> clazz = Class.forName("me.liuweiqiang.unoinpay.exports.TransferIn");
+        // the constructor and method can be accessed because it is exported and public
+        IFundTransfer iFundTransfer = (IFundTransfer) clazz.getDeclaredConstructor().newInstance();
+        iFundTransfer.transfer("External Account", "Internal Account", 102);
+        Method transfer = clazz.getDeclaredMethod("transfer", String.class, String.class, int.class);
+        Object instance = clazz.getDeclaredConstructor().newInstance();
+        transfer.invoke(instance, "External Account", "Internal Account", 103);
+        // the method can not be accessed because it is private and not opened
+        Method transferOldVersion = clazz.getDeclaredMethod("transfer", String.class, int.class);
+        try {
+            transferOldVersion.setAccessible(true);
+        } catch (InaccessibleObjectException e) {
+            e.printStackTrace();
+        }
+        try {
+            transferOldVersion.invoke(instance, "External Account", 104);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // all implementations of IFundTransfer can be accessed (provides)
+        ServiceLoader.load(IFundTransfer.class)
+                .stream()
+                .map(ServiceLoader.Provider::get)
+                .forEach(i -> i.transfer("Random Account", "Random Account", 105));
+
+        return display;
+    }
+}
