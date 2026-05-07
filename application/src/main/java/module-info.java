@@ -9,4 +9,5 @@ open module application {
     requires spring.web;
     requires entity;
     requires unoinpay;
+    requires java.instrument;
 }
