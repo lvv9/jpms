@@ -7,6 +7,10 @@ when run by IntelliJ IDEA, these packages/classes will be included in module pat
 - application\target\classes
 - spring-boot-3.4.5.jar
 
-TODO: packaging
+packaging:
+see packaging\pom.xml
+
+running:
+PATH\TO\JAVA\bin\java.exe -cp packaging\target\lib\* -p packaging\target\modules -m application/me.liuweiqiang.application.Application
 
 https://docs.oracle.com/javase/specs/jls/se9/html/jls-7.html#jls-7.7
