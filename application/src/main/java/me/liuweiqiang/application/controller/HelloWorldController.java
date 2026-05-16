@@ -1,6 +1,5 @@
 package me.liuweiqiang.application.controller;
 
-import me.liuweiqiang.entity.Displayable;
 import me.liuweiqiang.interfaces.exports.IFundTransfer;
 import me.liuweiqiang.unoinpay.exports.TransferIn;
 //import me.liuweiqiang.unoinpay.opens.TransferOut;
@@ -15,9 +14,6 @@ import java.util.ServiceLoader;
 public class HelloWorldController {
     @GetMapping("/")
     public String hello() throws Exception {
-        String display = Displayable.display();
-        System.out.println(display);
-
         TransferIn transferIn = new TransferIn();
         transferIn.transfer("External Account", "Internal Account", 100);
         // can not be imported because module unoinpay opens me.liuweiqiang.unoinpay.opens package but not exports
@@ -54,6 +50,15 @@ public class HelloWorldController {
                 .map(ServiceLoader.Provider::get)
                 .forEach(i -> i.transfer("Random Account", "Random Account", 105));
 
-        return display;
+        // A named module cannot declare a dependence upon the unnamed module.
+        // unless [--add-reads application=ALL-UNNAMED]
+        Class<?> displayableClazz = Class.forName("me.liuweiqiang.entity.Displayable");
+        Object consumable = displayableClazz.getDeclaredConstructor().newInstance();
+        Method toString = displayableClazz.getDeclaredMethod("toString");
+        String hello = (String) toString.invoke(consumable);
+        Method main = displayableClazz.getDeclaredMethod("main", String[].class);
+        main.invoke(null, (Object) null);
+
+        return hello;
     }
 }

@@ -34,18 +34,14 @@
             <artifactId>artifact-unoinpay</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>me.liuweiqiang</groupId>
-            <artifactId>artifact-entity</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 
     <build>
         <plugins>
             <plugin>
-<!--                can be optimized by analysing the dependency tree?-->
+                <!-- 1.install entity-new 2.install entity 3.package jpms  -->
+                <!-- can be optimized by analysing the dependency tree? -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
@@ -59,7 +55,7 @@
                             <outputDirectory>${project.build.directory}/modules</outputDirectory>
                             <includeGroupIds>me.liuweiqiang,org.springframework.boot,org.springframework</includeGroupIds>
                             <includeArtifactIds>spring-boot,spring-boot-autoconfigure,spring-web,
-                                artifact-entity,artifact-spi-interface,artifact-unoinpay,artifact-application</includeArtifactIds>
+                                artifact-entity-new,artifact-spi-interface,artifact-unoinpay,artifact-application</includeArtifactIds>
                         </configuration>
                     </execution>
                     <execution>
@@ -70,8 +66,8 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                            <excludeGroupIds>me.liuweiqiang</excludeGroupIds>
-                            <excludeArtifactIds>spring-boot,spring-boot-autoconfigure,spring-web</excludeArtifactIds>
+                            <excludeArtifactIds>spring-boot,spring-boot-autoconfigure,spring-web,
+                                artifact-entity-new,artifact-spi-interface,artifact-unoinpay,artifact-application</excludeArtifactIds>
                         </configuration>
                     </execution>
                 </executions>

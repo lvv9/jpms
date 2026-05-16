@@ -7,7 +7,8 @@ open module application {
     requires spring.boot;
     requires spring.boot.autoconfigure;
     requires spring.web;
-    requires entity;
     requires unoinpay;
+    // TODO
     requires java.instrument;
+//    requires org.apache.tomcat.embed.core;
 }
