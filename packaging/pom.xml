@@ -55,7 +55,8 @@
                             <outputDirectory>${project.build.directory}/modules</outputDirectory>
                             <includeGroupIds>me.liuweiqiang,org.springframework.boot,org.springframework</includeGroupIds>
                             <includeArtifactIds>spring-boot,spring-boot-autoconfigure,spring-web,
-                                artifact-entity-new,artifact-spi-interface,artifact-unoinpay,artifact-application</includeArtifactIds>
+                                artifact-entity-new,artifact-entity-automatic,
+                                artifact-spi-interface,artifact-unoinpay,artifact-application</includeArtifactIds>
                         </configuration>
                     </execution>
                     <execution>
@@ -67,7 +68,8 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
                             <excludeArtifactIds>spring-boot,spring-boot-autoconfigure,spring-web,
-                                artifact-entity-new,artifact-spi-interface,artifact-unoinpay,artifact-application</excludeArtifactIds>
+                                artifact-entity-new,artifact-entity-automatic,
+                                artifact-spi-interface,artifact-unoinpay,artifact-application</excludeArtifactIds>
                         </configuration>
                     </execution>
                 </executions>

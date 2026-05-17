@@ -4,37 +4,36 @@ import me.liuweiqiang.entity.ignored.Loaded;
 import me.liuweiqiang.entity.ignored.NotLoaded;
 import me.liuweiqiang.entity2.Consumable;
 
-import java.lang.reflect.InvocationTargetException;
-
-public class Displayable {
+public class Hello {
 
     @Override
     public String toString() {
         return "Hello";
     }
 
-    public static void main(String[] args) {
+    // when run by IDE:
+    // - entity in class path, i.e., thus entity is a unnamed module
+    // - entity_new in class path
+    // make entity in class path, entity_new in module path to observe the exceptions
+    public static void main(String[] args) throws Exception {
         // If a package is defined in both a named module and the unnamed module then the package in the unnamed module is ignored.
         try {
             new NotLoaded();
         } catch (NoClassDefFoundError e) {
             e.printStackTrace();
         }
-        new Loaded();
         // [--add-modules entity_new] to make module entity_new observable
+        new Loaded();
+        // can be accessed even it is opened only
         Consumable consumable = new Consumable();
         consumable.get("test01");
-        Class<?> clazz;
-        try {
-            clazz = Class.forName("me.liuweiqiang.entity2.internal.InternalConsumable");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        // but can not be accessed when it is not declared
+        Class<?> clazz = Class.forName("me.liuweiqiang.entity2.internal.InternalConsumable");;
         // the class can not be accessed even package me.liuweiqiang.entity is in unnamed module
-        // unless we launch application in a legacy way ([-cp], try running main directly)
+        // unless we launch application in a legacy way ([-cp], run main() by IDE directly)
         try {
             clazz.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }

@@ -1,5 +1,7 @@
 package me.liuweiqiang.application.controller;
 
+//import me.liuweiqiang.automatic.entity.World;
+import me.liuweiqiang.entity.Hello;
 import me.liuweiqiang.interfaces.exports.IFundTransfer;
 import me.liuweiqiang.unoinpay.exports.TransferIn;
 //import me.liuweiqiang.unoinpay.opens.TransferOut;
@@ -16,7 +18,8 @@ public class HelloWorldController {
     public String hello() throws Exception {
         TransferIn transferIn = new TransferIn();
         transferIn.transfer("External Account", "Internal Account", 100);
-        // can not be imported because module unoinpay opens me.liuweiqiang.unoinpay.opens package but not exports
+        // can not be imported because module unoinpay opens me.liuweiqiang.unoinpay.opens package
+        // but does not export
 //        TransferOut exportedTransferOut = new TransferOut();
 
         IFundTransfer transferOut = (IFundTransfer) Class
@@ -31,7 +34,7 @@ public class HelloWorldController {
         Method transfer = clazz.getDeclaredMethod("transfer", String.class, String.class, int.class);
         Object instance = clazz.getDeclaredConstructor().newInstance();
         transfer.invoke(instance, "External Account", "Internal Account", 103);
-        // the method can not be accessed because it is private and not opened
+        // the method can not be accessed because it is private and is not opened
         Method transferOldVersion = clazz.getDeclaredMethod("transfer", String.class, int.class);
         try {
             transferOldVersion.setAccessible(true);
@@ -40,9 +43,12 @@ public class HelloWorldController {
         }
         try {
             transferOldVersion.invoke(instance, "External Account", 104);
-        } catch (Exception e) {
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        Class<?> openedPrivateTransfer = Class.forName("me.liuweiqiang.unoinpay.opens.OpenedPrivateTransfer");
+        Object openedPrivateTransferInstance = openedPrivateTransfer.getDeclaredConstructor().newInstance();
+        System.out.println(openedPrivateTransferInstance);
 
         // all implementations of IFundTransfer can be accessed (provides)
         ServiceLoader.load(IFundTransfer.class)
@@ -50,15 +56,31 @@ public class HelloWorldController {
                 .map(ServiceLoader.Provider::get)
                 .forEach(i -> i.transfer("Random Account", "Random Account", 105));
 
+        return "hello";
+    }
+
+    // when run by IDE:
+    // - application in module path
+    // - entity in class path, i.e., thus entity is a unnamed module
+    // - entity_new in class path
+    public static void main(String[] args) throws Exception {
         // A named module cannot declare a dependence upon the unnamed module.
-        // unless [--add-reads application=ALL-UNNAMED]
-        Class<?> displayableClazz = Class.forName("me.liuweiqiang.entity.Displayable");
-        Object consumable = displayableClazz.getDeclaredConstructor().newInstance();
-        Method toString = displayableClazz.getDeclaredMethod("toString");
-        String hello = (String) toString.invoke(consumable);
-        Method main = displayableClazz.getDeclaredMethod("main", String[].class);
+        // Unless [--add-reads application=ALL-UNNAMED] (try running jar without --add-reads to observe the exceptions)
+        // or reflectively access
+        Class<?> helloClazz = Class.forName("me.liuweiqiang.entity.Hello");
+        Object helloInstance = helloClazz.getDeclaredConstructor().newInstance();
+        Method toString = helloClazz.getDeclaredMethod("toString");
+        String hello = (String) toString.invoke(helloInstance);
+        System.out.println(hello);
+        try {
+            new Hello();
+        } catch (IllegalAccessError e) {
+            e.printStackTrace();
+        }
+        Method main = helloClazz.getDeclaredMethod("main", String[].class);
         main.invoke(null, (Object) null);
 
-        return hello;
+//        World world = new World();
+//        System.out.println(world.join());
     }
 }

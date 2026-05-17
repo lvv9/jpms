@@ -1,6 +1,6 @@
 TODO: legacy packages in module path or class path
 
-when run by IntelliJ IDEA, these packages/classes will be included in module path:
+when run by IntelliJ IDEA(Application.class), these packages/classes will be included in module path:
 - unoinpay\target\classes
 - spring-web-6.2.6.jar
 - spi-interface\target\classes
