@@ -61,7 +61,7 @@ public class HelloWorldController {
 
     // when run by IDE:
     // - application in module path
-    // - entity in class path, i.e., thus entity is a unnamed module
+    // - entity in class path, i.e., thus entity is an unnamed module
     // - entity_new in class path
     public static void main(String[] args) throws Exception {
         // A named module cannot declare a dependence upon the unnamed module.

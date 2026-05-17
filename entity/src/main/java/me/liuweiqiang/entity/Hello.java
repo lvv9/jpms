@@ -3,6 +3,9 @@ package me.liuweiqiang.entity;
 import me.liuweiqiang.entity.ignored.Loaded;
 import me.liuweiqiang.entity.ignored.NotLoaded;
 import me.liuweiqiang.entity2.Consumable;
+import me.liuweiqiang.unnamed.PublicClass;
+
+import java.lang.reflect.Constructor;
 
 public class Hello {
 
@@ -28,7 +31,7 @@ public class Hello {
         Consumable consumable = new Consumable();
         consumable.get("test01");
         // but can not be accessed when it is not declared
-        Class<?> clazz = Class.forName("me.liuweiqiang.entity2.internal.InternalConsumable");;
+        Class<?> clazz = Class.forName("me.liuweiqiang.entity2.internal.InternalConsumable");
         // the class can not be accessed even package me.liuweiqiang.entity is in unnamed module
         // unless we launch application in a legacy way ([-cp], run main() by IDE directly)
         try {
@@ -36,5 +39,11 @@ public class Hello {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+
+        System.out.println(new PublicClass());
+        Class<?> unnamedPrivateClazz = Class.forName("me.liuweiqiang.unnamed.PrivateClass");
+        Constructor<?> constructor = unnamedPrivateClazz.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        System.out.println(constructor.newInstance());
     }
 }
