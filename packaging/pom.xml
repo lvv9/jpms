@@ -40,7 +40,14 @@
     <build>
         <plugins>
             <plugin>
-                <!-- 1.install entity-new 2.install entity 3.package jpms  -->
+                <!--
+                1.install artifact-entity-unnamed-unnamed
+                2.install artifact-entity-new
+                3.install artifact-entity-automatic-avoid-circle
+                4.install artifact-entity
+                5.install artifact-entity-automatic
+                3.package jpms
+                -->
                 <!-- can be optimized by analysing the dependency tree? -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
