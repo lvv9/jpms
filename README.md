@@ -12,7 +12,10 @@ packaging:
 see packaging\pom.xml
 
 running:
+```shell
 PATH\TO\JAVA\bin\java.exe -cp packaging\target\lib\* -p packaging\target\modules -m application/me.liuweiqiang.application.Application
+PATH/TO/JAVA/bin/java -cp "packaging/target/lib/*" -p packaging/target/modules --add-modules entity_new -m application/me.liuweiqiang.application.controller.HelloWorldController
+```
 
 ```
 --class-path classpath, -classpath classpath, or -cp classpath

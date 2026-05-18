@@ -3,6 +3,7 @@ package me.liuweiqiang.application.controller;
 import me.liuweiqiang.automatic.entity.World;
 import me.liuweiqiang.entity.Hello;
 import me.liuweiqiang.interfaces.exports.IFundTransfer;
+import me.liuweiqiang.no.circle.John;
 import me.liuweiqiang.unoinpay.exports.TransferIn;
 //import me.liuweiqiang.unoinpay.opens.TransferOut;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,5 +85,7 @@ public class HelloWorldController {
         System.out.println(worldClazz.getDeclaredConstructor().newInstance());
         World world = new World();
         System.out.println(world.join());
+        // transitive
+        System.out.println(new John() + " final");
     }
 }

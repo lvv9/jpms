@@ -23,6 +23,11 @@
             <artifactId>artifact-entity</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>me.liuweiqiang</groupId>
+            <artifactId>artifact-entity-automatic-avoid-circle</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
