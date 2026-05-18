@@ -3,6 +3,7 @@ package me.liuweiqiang.entity;
 import me.liuweiqiang.entity.ignored.Loaded;
 import me.liuweiqiang.entity.ignored.NotLoaded;
 import me.liuweiqiang.entity2.Consumable;
+import me.liuweiqiang.no.circle.John;
 import me.liuweiqiang.unnamed.PublicClass;
 
 import java.lang.reflect.Constructor;
@@ -15,7 +16,7 @@ public class Hello {
     }
 
     // when run by IDE:
-    // - entity in class path, i.e., thus entity is a unnamed module
+    // - entity in class path, i.e., thus entity is an unnamed module
     // - entity_new in class path
     // make entity in class path, entity_new in module path to observe the exceptions
     public static void main(String[] args) throws Exception {
@@ -25,7 +26,7 @@ public class Hello {
         } catch (NoClassDefFoundError e) {
             e.printStackTrace();
         }
-        // [--add-modules entity_new] to make module entity_new observable
+        // try running jar with [--add-modules entity_new] to make module entity_new observable
         new Loaded();
         // can be accessed even it is opened only
         Consumable consumable = new Consumable();
@@ -45,5 +46,7 @@ public class Hello {
         Constructor<?> constructor = unnamedPrivateClazz.getDeclaredConstructor();
         constructor.setAccessible(true);
         System.out.println(constructor.newInstance());
+
+        System.out.println(new John());
     }
 }

@@ -37,6 +37,11 @@
             <artifactId>artifact-unoinpay</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>me.liuweiqiang</groupId>
+            <artifactId>artifact-entity-automatic</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

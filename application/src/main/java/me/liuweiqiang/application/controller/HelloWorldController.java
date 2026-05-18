@@ -1,6 +1,6 @@
 package me.liuweiqiang.application.controller;
 
-//import me.liuweiqiang.automatic.entity.World;
+import me.liuweiqiang.automatic.entity.World;
 import me.liuweiqiang.entity.Hello;
 import me.liuweiqiang.interfaces.exports.IFundTransfer;
 import me.liuweiqiang.unoinpay.exports.TransferIn;
@@ -80,7 +80,9 @@ public class HelloWorldController {
         Method main = helloClazz.getDeclaredMethod("main", String[].class);
         main.invoke(null, (Object) null);
 
-//        World world = new World();
-//        System.out.println(world.join());
+        Class<?> worldClazz = Class.forName("me.liuweiqiang.automatic.entity.World");
+        System.out.println(worldClazz.getDeclaredConstructor().newInstance());
+        World world = new World();
+        System.out.println(world.join());
     }
 }
