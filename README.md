@@ -15,6 +15,7 @@ running:
 ```shell
 PATH\TO\JAVA\bin\java.exe -cp packaging\target\lib\* -p packaging\target\modules -m application/me.liuweiqiang.application.Application
 PATH/TO/JAVA/bin/java -cp "packaging/target/lib/*" -p packaging/target/modules --add-modules entity_new -m application/me.liuweiqiang.application.controller.HelloWorldController
+PATH/TO/JAVA/bin/java -p "packaging/target/lib:packaging/target/modules/artifact-application-1.0-SNAPSHOT.jar:packaging/target/modules/artifact-spi-interface-1.0-SNAPSHOT.jar:packaging/target/modules/artifact-unoinpay-1.0-SNAPSHOT.jar:packaging/target/modules/spring-boot-3.4.5.jar:packaging/target/modules/spring-boot-autoconfigure-3.4.5.jar:packaging/target/modules/spring-web-6.2.6.jar:packaging/target/modules/artifact-entity-automatic-1.0-SNAPSHOT.jar" --add-modules ALL-MODULE-PATH -m application/me.liuweiqiang.application.Application
 ```
 
 ```

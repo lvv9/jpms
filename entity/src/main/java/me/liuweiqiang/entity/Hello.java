@@ -15,12 +15,13 @@ public class Hello {
         return "Hello";
     }
 
-    // when run by IDE:
-    // - entity in class path, i.e., thus entity is an unnamed module
-    // - entity_new in class path
-    // make entity in class path, entity_new in module path to observe the exceptions
     public static void main(String[] args) throws Exception {
-        // If a package is defined in both a named module and the unnamed module then the package in the unnamed module is ignored.
+        // if a package is defined in both a named module and the unnamed module then the package in the unnamed module is ignored.
+        // when run by IDE:
+        // - entity in class path, i.e., thus entity is an unnamed module
+        // - entity_new in class path
+        // make entity in class path, entity_new in module path to observe the exceptions
+        // will not boot if split package me.liuweiqiang.entity.ignored into named modules(artifact.entity & entity_new)
         try {
             new NotLoaded();
         } catch (NoClassDefFoundError e) {
