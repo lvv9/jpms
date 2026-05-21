@@ -9,8 +9,6 @@ open module application {
     requires spring.boot;
     requires spring.boot.autoconfigure;
     requires spring.web;
-    requires unoinpay;
+    requires unionpay;
     requires artifact.entity.automatic;
-    // TODO
-//    requires java.instrument;
 }

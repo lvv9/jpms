@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>me.liuweiqiang</groupId>
-            <artifactId>artifact-unoinpay</artifactId>
+            <artifactId>artifact-unionpay</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -63,7 +63,7 @@
                             <includeGroupIds>me.liuweiqiang,org.springframework.boot,org.springframework</includeGroupIds>
                             <includeArtifactIds>spring-boot,spring-boot-autoconfigure,spring-web,
                                 artifact-entity-new,artifact-entity-automatic,artifact-entity-automatic-avoid-circle,
-                                artifact-spi-interface,artifact-unoinpay,artifact-application</includeArtifactIds>
+                                artifact-spi-interface,artifact-unionpay,artifact-application</includeArtifactIds>
                         </configuration>
                     </execution>
                     <execution>
@@ -76,7 +76,7 @@
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
                             <excludeArtifactIds>spring-boot,spring-boot-autoconfigure,spring-web,
                                 artifact-entity-new,artifact-entity-automatic,artifact-entity-automatic-avoid-circle,
-                                artifact-spi-interface,artifact-unoinpay,artifact-application</excludeArtifactIds>
+                                artifact-spi-interface,artifact-unionpay,artifact-application</excludeArtifactIds>
                         </configuration>
                     </execution>
                 </executions>

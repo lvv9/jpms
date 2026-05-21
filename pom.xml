@@ -11,7 +11,7 @@
     <modules>
         <module>application</module>
         <module>spi-interface</module>
-        <module>unoinpay</module>
+        <module>unionpay</module>
         <module>packaging</module>
     </modules>
 

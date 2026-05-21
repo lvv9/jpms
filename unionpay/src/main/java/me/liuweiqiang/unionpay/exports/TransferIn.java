@@ -1,4 +1,4 @@
-package me.liuweiqiang.unoinpay.exports;
+package me.liuweiqiang.unionpay.exports;
 
 import me.liuweiqiang.interfaces.exports.IFundTransfer;
 

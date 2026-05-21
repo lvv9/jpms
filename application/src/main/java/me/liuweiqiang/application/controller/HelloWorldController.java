@@ -4,8 +4,8 @@ import me.liuweiqiang.automatic.entity.World;
 import me.liuweiqiang.entity.Hello;
 import me.liuweiqiang.interfaces.exports.IFundTransfer;
 import me.liuweiqiang.no.circle.John;
-import me.liuweiqiang.unoinpay.exports.TransferIn;
-//import me.liuweiqiang.unoinpay.opens.TransferOut;
+import me.liuweiqiang.unionpay.exports.TransferIn;
+//import me.liuweiqiang.unionpay.opens.TransferOut;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,16 +19,16 @@ public class HelloWorldController {
     public String hello() throws Exception {
         TransferIn transferIn = new TransferIn();
         transferIn.transfer("External Account", "Internal Account", 100);
-        // can not be imported because module unoinpay opens me.liuweiqiang.unoinpay.opens package
+        // can not be imported because module unionpay opens me.liuweiqiang.unionpay.opens package
         // but does not export
 //        TransferOut exportedTransferOut = new TransferOut();
 
         IFundTransfer transferOut = (IFundTransfer) Class
-                .forName("me.liuweiqiang.unoinpay.opens.TransferOut")
+                .forName("me.liuweiqiang.unionpay.opens.TransferOut")
                 .getDeclaredConstructor()
                 .newInstance();
         transferOut.transfer("Internal Account", "External Account", 101);
-        Class<?> clazz = Class.forName("me.liuweiqiang.unoinpay.exports.TransferIn");
+        Class<?> clazz = Class.forName("me.liuweiqiang.unionpay.exports.TransferIn");
         // the constructor and method can be accessed because it is exported and public
         IFundTransfer iFundTransfer = (IFundTransfer) clazz.getDeclaredConstructor().newInstance();
         iFundTransfer.transfer("External Account", "Internal Account", 102);
@@ -47,7 +47,7 @@ public class HelloWorldController {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        Class<?> openedPrivateTransfer = Class.forName("me.liuweiqiang.unoinpay.opens.OpenedPrivateTransfer");
+        Class<?> openedPrivateTransfer = Class.forName("me.liuweiqiang.unionpay.opens.OpenedPrivateTransfer");
         Object openedPrivateTransferInstance = openedPrivateTransfer.getDeclaredConstructor().newInstance();
         System.out.println(openedPrivateTransferInstance);
 
