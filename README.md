@@ -5,6 +5,7 @@ when run by IntelliJ IDEA(Application.class), these packages/classes will be inc
 - spring-boot-autoconfigure-3.4.5.jar
 - application\target\classes
 - spring-boot-3.4.5.jar
+- entity-automatic\target\classes
 
 packaging:
 see packaging\pom.xml
